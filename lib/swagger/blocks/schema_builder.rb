@@ -15,9 +15,10 @@ module Swagger
                              Symbol).freeze
 
         def get_required_fields(model_class)
+          return [] unless model_class.respond_to?(:validators)
           presence_validators = model_class.
             validators.
-            select { |v| v.class == Mongoid::Validatable::PresenceValidator }
+            select { |v| v.class == ActiveRecord::Validations::PresenceValidator }
 
           required_fields = presence_validators.map { |v| v.attributes.first }
           required_fields << '_id'

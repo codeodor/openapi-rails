@@ -16,7 +16,7 @@ module Openapi
 
           name = name.to_s.titleize.remove(' ')
           root_klass_name = "#{name}SwaggerRootController"
-          klass = Object.const_set root_klass_name, Class.new(SwaggerRoot)
+          klass = Object.const_set root_klass_name, Class.new(Openapi::SwaggerRoot)
           klass.build_specification(config, config[:controllers])
 
           config[:controllers].push klass
